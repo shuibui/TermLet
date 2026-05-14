@@ -746,7 +746,7 @@ local function apply_keybindings()
     local key = saved_keybindings[script.name]
     if key and key ~= "" then
       -- Create keybinding for this script
-      local function_name = "run_" .. script.name:gsub("[%s%-%.]", "_"):lower()
+      local function_name = "run_" .. script.name:gsub("[%s%-%.]", "_"):gsub("_+", "_"):lower()
       local run_func = M[function_name]
 
       if run_func then
@@ -838,7 +838,7 @@ function M.setup(user_config)
     end
 
     -- Create sanitized function name
-    local function_name = "run_" .. script.name:gsub("[%s%-%.]", "_"):lower()
+    local function_name = "run_" .. script.name:gsub("[%s%-%.]", "_"):gsub("_+", "_"):lower()
 
     -- Ensure function name is valid
     if not function_name:match("^[a-zA-Z_][a-zA-Z0-9_]*$") then
